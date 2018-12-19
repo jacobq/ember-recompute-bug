@@ -1,5 +1,16 @@
-<button onclick={{action "setA"}}>Set "a" property</button><br>
-y = {{y}}
+<button onclick={{action "reset"}}>Reset</button><br>
+<button onclick={{action "setA"}}>Set a = []</button><br>
+<button onclick={{action "pushA"}}>Push new object into a</button><br>
+y (= a[0]) = {{y}}<br>
+
+a ({{a.length}}):
+<ul>
+  {{#each a as |item|}}
+    <li>a = {{item.a}}, b = {{item.b}}</li>
+  {{/each}}
+</ul>
+
+Messages ({{messages.length}}):
 <ul>
   {{#each messages as |m|}}
     <li>{{m}}</li>

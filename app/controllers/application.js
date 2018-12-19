@@ -1,10 +1,14 @@
 import Controller from '@ember/controller';
-import EmberObject, { computed, observer } from '@ember/object';
-import { map } from '@ember/object/computed';
+import { computed, observer } from '@ember/object';
+
 
 export default Controller.extend({
   init() {
     this._super(...arguments);
+    this._reset();
+  },
+  _reset() {
+    this.set('a', []);
     this.set('messages', []);
   },
   log(message) {
@@ -13,13 +17,9 @@ export default Controller.extend({
     this.messages.pushObject(`${Date.now()}: ${message}`);
   },
 
-  a: null,
-  x: map('a', function(a) {
-    return EmberObject.create(a);
-  }),
-  y: computed('x.@each.{a,b}', function() {
-    this.log('computing y; returning x[0]');
-    return this.x[0];
+  y: computed('a.@each.{a,b}', function() {
+    this.log('computing y; returning a[0]');
+    return this.a.firstObject;
   }),
   _a: observer('y', function() {
     this.log('_a (observer) firing; returning y');
@@ -27,12 +27,16 @@ export default Controller.extend({
   }),
 
   actions: {
+    reset() {
+      this._reset();
+    },
     setA() {
       this.log('setA action running');
-      this.set('a', [{
-        a: 1,
-        b: 2
-      }]);
+      this.set('a', []);
+    },
+    pushA() {
+      this.log('pushA action running');
+      this.a.pushObject({ a: Math.random(), b: Math.random() });
     }
   }
 })
