@@ -1,12 +1,13 @@
 import Controller from '@ember/controller';
-import { computed, observer } from '@ember/object';
-import { bool, map } from '@ember/object/computed';
+import EmberObject, { computed, observer } from '@ember/object';
+import { map } from '@ember/object/computed';
 
-window.x = Ember.Object.extend({
+window.x = EmberObject.extend({
   x: map('a', function(a) {
-    return Ember.Object.create(a);
+    return EmberObject.create(a);
   }),
   y: computed('x.@each.{a,b}', function() {
+    // eslint-disable-next-line no-console
     console.log('computing y');
     return this.x[0];
   }),
