@@ -1,18 +1,50 @@
 <button onclick={{action "reset"}}>Reset</button><br>
 <button onclick={{action "setA"}}>Set a = []</button><br>
 <button onclick={{action "pushA"}}>Push new object into a</button><br>
-y (= a[0]) = {{y}}<br>
 
-a ({{a.length}}):
-<ul>
-  {{#each a as |item|}}
-    <li>a = {{item.a}}, b = {{item.b}}</li>
-  {{/each}}
-</ul>
+<table>
+  <thead>
+    <tr>
+      <th>array</th>
+      <th>each</th>
+      <th>doubleEach</th>
+      <th>doubleEach2</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>{{counts.a}}</td>
+      <td>{{counts.e}}</td>
+      <td>{{counts.de}}</td>
+      <td>{{counts.de2}}</td>
+    </tr>
+  </tbody>
+</table>
 
-Messages ({{messages.length}}):
-<ul>
-  {{#each messages as |m|}}
-    <li>{{m}}</li>
-  {{/each}}
-</ul>
+<details>
+  <summary>a ({{a.length}})</summary>
+  <ul>
+    {{#each a as |item|}}
+      <li>a = {{item.a}}, b = {{item.b}}</li>
+    {{/each}}
+  </ul>
+</details>
+<br>
+
+<details>
+  <summary>(these values can be ignored -- just need them to trigger lazy evaluation of CPs)</summary>
+  arrayCP = {{arrayCP}}<br>
+  eachCP = {{eachCP}}<br>
+  doubleEachCP = {{doubleEachCP}}<br>
+  doubleEachCP2 = {{doubleEachCP2}}<br>
+</details>
+<br>
+
+<details>
+  <summary>Messages ({{messages.length}})</summary>
+  <ul>
+    {{#each messages as |m|}}
+      <li>{{m}}</li>
+    {{/each}}
+  </ul>
+</details>
